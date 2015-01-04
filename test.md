@@ -1,6 +1,7 @@
 ---
 layout: page
-title: "Test"
+title: "测试页面"
 description: ""
+group: navigation
 ---
 {% include JB/setup %}
