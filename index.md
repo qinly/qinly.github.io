@@ -7,12 +7,13 @@ tagline: tagline test
 
 ## 标题1 
 
-博客地址：[My Blog](http://qinly.guthub.io)
+博客地址：[My Blog](http://qinly.github.io)
 
 文章列表：
 
 <ul class="posts">
 {% for post in site.posts %}
-<li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
+<!-- date_to_string -->
+<li><span>{{ post.date | date: "%Y-%m-%d" }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
 {% endfor %}
 </ul>
