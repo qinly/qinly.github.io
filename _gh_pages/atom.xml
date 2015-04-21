@@ -1,0 +1,1747 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>Qing 个人博客</title>
+ <link href="http://qinly.github.io/" rel="self"/>
+ <link href="http://qinly.github.io"/>
+ <updated>2015-04-21T13:41:24+08:00</updated>
+ <id>http://qinly.github.io</id>
+ <author>
+   <name>GuoQing. Lai.</name>
+   <email>qing_lgq@163.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>JS 匿名函数</title>
+   <link href="http://qinly.github.io/2015/04/20/JS%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"/>
+   <updated>2015-04-20T00:00:00+08:00</updated>
+   <id>http://qinly.github.io/2015/04/20/JS匿名函数</id>
+   <content type="html">&lt;h2 id=&quot;js-&quot;&gt;JS 匿名函数&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;
++function ($) {
+  &#39;use strict&#39;;
+  ...
+}(jQuery);
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;使用+号的原因&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function() {}() // 但在前面加上一个布尔运算符（只多了一个感叹号），就是表达式了，将执行后面的代码， 也就合法实现调用
+
+!function() {}()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;会报错，常见使用括号包裹匿名调用（+ - * !…都可以）。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(function() {})()
++function() {}()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一般来讲&lt;code&gt;(function(){})()&lt;/code&gt;是在写源码的时候用到，可读性好一些；而源码压缩后会转成&lt;code&gt;!function(){}()&lt;/code&gt;的形式，省掉一个字节。&lt;/p&gt;
+
+&lt;p&gt;注意：在最新的浏览器上 &lt;code&gt;ie11,ff26,chrome32,safari7&lt;/code&gt; , 括号性能要比&lt;code&gt;+或-&lt;/code&gt;要好!&lt;br /&gt;
+可阅读&lt;a href=&quot;http://jsperf.com/js-funcion-expression-speed&quot;&gt;http://jsperf.com/js-funcion-expression-speed&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Linux主机安全配置的几个脚本</title>
+   <link href="http://qinly.github.io/2015/04/18/001"/>
+   <updated>2015-04-18T00:00:00+08:00</updated>
+   <id>http://qinly.github.io/2015/04/18/001</id>
+   <content type="html">
+</content>
+ </entry>
+ 
+ <entry>
+   <title>SVN命令使用</title>
+   <link href="http://qinly.github.io/2015/04/14/SVN%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://qinly.github.io/2015/04/14/SVN命令使用</id>
+   <content type="html">&lt;h2 id=&quot;svn&quot;&gt;SVN命令使用&lt;/h2&gt;
+
+&lt;p&gt;原文地址:&lt;a href=&quot;http://www.cnblogs.com/snandy/p/4072857.html&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Snandy&lt;/p&gt;
+
+&lt;p&gt;Stop, thinking is the essence of progress.
+Mac SVN 命令行&lt;/p&gt;
+
+&lt;p&gt;Mac自带了SVN命令行，如我的升级到10.10（OSX yosemite）后命令行版本为1.7.10&lt;/p&gt;
+
+&lt;p&gt;以下是一些常用命令&lt;/p&gt;
+
+&lt;p&gt;1、将文件checkout到本地目录&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;	
+svn checkout path（path是服务器上的目录）
+例如：svn checkout svn://192.168.1.1/pro/domain
+简写：svn co
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;2、往版本库中添加新的文件&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+svn add file
+例如：svn add test.php(添加test.php)
+svn add *.php(添加当前目录下所有的php文件)
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;3、将改动的文件提交到版本库&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+svn commit -m “LogMessage“ [-N] [--no-unlock] PATH(如果选择了保持锁，就使用–no-unlock开关)
+例如：svn commit -m “add test file for my test“ test.php
+简写：svn ci
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;4、加锁/解锁&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;	
+svn lock -m “LockMessage“ [--force] PATH
+例如：svn lock -m “lock test file“ test.php
+svn unlock PATH
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;5、更新到某个版本&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;	
+svn update -r m path
+例如：
+svn update如果后面没有目录，默认将当前目录以及子目录下的所有文件都更新到最新版本。
+svn update -r 200 test.php(将版本库中的文件test.php还原到版本200)
+svn update test.php(更新，于版本库同步。如果在提交的时候提示过期的话，是因为冲突，需要先update，修改文件，然后清除svn resolved，最后再提交commit)
+简写：svn up
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;6、查看文件或者目录状态&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+1）svn status path（目录下的文件和子目录的状态，正常状态不显示）
+【?：不在svn的控制中；M：内容被修改；C：发生冲突；A：预定加入到版本库；K：被锁定】
+2）svn status -v path(显示文件和子目录状态)
+第一列保持相同，第二列显示工作版本号，第三和第四列显示最后一次修改的版本号和修改人。
+注：svn status、svn diff和 svn revert这三条命令在没有网络的情况下也可以执行的，原因是svn在本地的.svn中保留了本地版本的原始拷贝。
+简写：svn st
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;7、删除文件&lt;/p&gt;
+
+&lt;p&gt;```
+svn delete path -m “delete test fle“
+例如：svn delete svn://192.168.1.1/pro/domain/test.php -m “delete test file”
+或者直接svn delete test.php 然后再svn ci -m ‘delete test file‘，推荐使用这种
+简写：svn (del, remove, rm)&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;8、查看日志&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+svn log path  
+例如：svn log test.php 显示这个文件的所有修改记录，及其版本号的变化
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;9、查看文件详细信息&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;	
+svn info path
+例如：svn info test.php
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;10、比较差异&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+svn diff path(将修改的文件与基础版本比较)
+例如：svn diff test.php
+svn diff -r m:n path(对版本m和版本n比较差异)
+例如：svn diff -r 200:201 test.php
+简写：svn di
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;11、将两个版本之间的差异合并到当前文件&lt;/p&gt;
+
+&lt;p&gt;svn merge -r m:n path
+例如：svn merge -r 200:205 test.php（将版本200与205之间的差异合并到当前文件，但是一般都会产生冲突，需要处理一下）&lt;/p&gt;
+
+&lt;p&gt;12、SVN 帮助&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;	
+svn help
+svn help ci
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;13、版本库下的文件和目录列表&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;	
+svn list path
+显示path目录下的所有属于版本库的文件和目录
+简写：svn ls
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;14、创建纳入版本控制下的新目录&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+svn mkdir: 创建纳入版本控制下的新目录。
+用法: 1、mkdir PATH…
+2、mkdir URL…
+创建版本控制的目录。
+1、每一个以工作副本 PATH 指定的目录，都会创建在本地端，并且加入新增
+调度，以待下一次的提交。
+2、每个以URL指定的目录，都会透过立即提交于仓库中创建。
+在这两个情况下，所有的中间目录都必须事先存在
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;15、恢复本地修改&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+svn revert: 恢复原始未改变的工作副本文件 (恢复大部份的本地修改)。revert:
+用法: revert PATH…
+注意: 本子命令不会存取网络，并且会解除冲突的状况。但是它不会恢复
+被删除的目录
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;16、代码库URL变更&lt;/p&gt;
+
+&lt;p&gt;```
+svn switch (sw): 更新工作副本至不同的URL。
+用法: 1、switch URL [PATH]
+2、switch –relocate FROM TO [PATH…]&lt;/p&gt;
+
+&lt;p&gt;1、更新你的工作副本，映射到一个新的URL，其行为跟“svn update”很像，也会将
+服务器上文件与本地文件合并。这是将工作副本对应到同一仓库中某个分支或者标记的
+方法。
+2、改写工作副本的URL元数据，以反映单纯的URL上的改变。当仓库的根URL变动
+(比如方案名或是主机名称变动)，但是工作副本仍旧对映到同一仓库的同一目录时使用
+这个命令更新工作副本与仓库的对应关系。
+```&lt;/p&gt;
+
+&lt;p&gt;17、解决冲突&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+svn resolved: 移除工作副本的目录或文件的“冲突”状态。
+用法: resolved PATH…
+注意: 本子命令不会依语法来解决冲突或是移除冲突标记；它只是移除冲突的
+相关文件，然后让 PATH 可以再次提交。 
+&lt;/code&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>base64：URL背景图片与web页面性能优化</title>
+   <link href="http://qinly.github.io/2015/04/08/URL%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E4%B8%8Eweb%E9%A1%B5%E9%9D%A2%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"/>
+   <updated>2015-04-08T00:00:00+08:00</updated>
+   <id>http://qinly.github.io/2015/04/08/URL背景图片与web页面性能优化</id>
+   <content type="html">&lt;h2 id=&quot;base64urlweb&quot;&gt;base64：URL背景图片与web页面性能优化&lt;/h2&gt;
+
+&lt;p&gt;原文地址:&lt;a href=&quot;http://www.poluoluo.com/jzxy/201206/166976_3.html&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;下文不再考虑IE 8以下浏览器！&lt;/p&gt;
+
+&lt;p&gt;一、base64百科&lt;/p&gt;
+
+&lt;p&gt;Base64是网络上最常见的用于传输8Bit字节代码的编码方式之一，可用于在HTTP环境下传递较长的标识信息。&lt;/p&gt;
+
+&lt;p&gt;例如下面这个：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;data:image/gif;base64,R0lGODlhAwADAIABAL6+vv///yH5BAEAAAEALAAAAAADAAMAAAIDjA9WADs=&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;二、base64与文件数据编码&lt;/p&gt;
+
+&lt;p&gt;在网络中，通过HTTP传输的文件还可以通过base64对数据进行编码进行传输。就如上面的这个base64的gif格式图片。当然，可以base64编码的文件不仅仅是图片，也可以是字体文件，例如（中间有缺省）：&lt;/p&gt;
+
+&lt;p&gt;@font-face{&lt;/p&gt;
+
+&lt;p&gt;font-family: forTest;&lt;/p&gt;
+
+&lt;p&gt;src:url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAh4 … RFERuENEGADl7JlY=) format(‘woff’);&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;自然，对于background-image图片，我们也可以使用base64编码进行传输，例如：&lt;/p&gt;
+
+&lt;p&gt;background-image:url(data:image/gif;base64,R0lGODlhBAABAIABAMLBwfLx8SH5BAEAAAEALAAAAAAEAAEAAAICRF4AOw==);&lt;/p&gt;
+
+&lt;p&gt;而使用base64编码作为background-image图片就是本文要着重阐述的。&lt;/p&gt;
+
+&lt;p&gt;三、如何获得图片的base64编码&lt;/p&gt;
+
+&lt;p&gt;其实在我之前“基于HTML5的可预览多图片Ajax上传”以及“zSlide-基于CSS3/HTML5演示文档jQuery插件”实际上就与图片的base64编码的获取打过交道了。如下本地图片转换成可预览的base64编码的核心脚本：&lt;/p&gt;
+
+&lt;p&gt;var reader = new FileReader(), htmlImage;&lt;/p&gt;
+
+&lt;p&gt;reader.onload = function(e) {&lt;/p&gt;
+
+&lt;p&gt;htmlImage = ‘&lt;img src=&quot;&#39;+ e.target.result +&#39;&quot; /&gt;’; // 这里e.target.result就是base64编码&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;reader.readAsDataURL(file);&lt;/p&gt;
+
+&lt;p&gt;上面说的你只需要了解，实际上，目前base64编码工具不少，对于我们前端制作，下面这个本地图片 base64编码获取页面是值得推荐的：Encode Data URL By PuterJam&lt;/p&gt;
+
+&lt;p&gt;直接将桌面图片拖到条条里就有了响应的background-image url属性可用的base64地址了：&lt;/p&gt;
+
+&lt;p&gt;在线获取本地图片base64编码使用示例 张鑫旭-鑫空间-鑫生活&lt;/p&gt;
+
+&lt;p&gt;该转换页面的原理就是上面所说的HTML5 文件本地预览原理，具体可以自己查阅资料。&lt;/p&gt;
+
+&lt;p&gt;四、使用base64:URL的优缺点&lt;/p&gt;
+
+&lt;p&gt;个人觉得base64:URL传输图片文件的好处在于：&lt;/p&gt;
+
+&lt;p&gt;1.减少了HTTP请求&lt;/p&gt;
+
+&lt;p&gt;2.某些文件可以避免跨域的问题&lt;/p&gt;
+
+&lt;p&gt;3.没有图片更新要重新上传，还要清理缓存的问题&lt;/p&gt;
+
+&lt;p&gt;不足在于：&lt;/p&gt;
+
+&lt;p&gt;1.浏览器支持&lt;/p&gt;
+
+&lt;p&gt;使用base64编码图片作为背景图片的这种技术IE6/IE7浏览器是不支持的（IE9浏览器IE7模式下支持，这里被@前端的那点破事鄙视了 ）。对于目前PC页面，兼容性问题使没有文件上传以及无需更新缓存的优点不存在了。&lt;/p&gt;
+
+&lt;p&gt;2.增加了CSS文件的尺寸&lt;/p&gt;
+
+&lt;p&gt;base64编码图片本质上是将图片的二进制大小以一些字母的形式展示，例如一个1024字节的图片，base64编码后至少1024个字符，这个大小会被完全嵌入到CSS文件中（不过幸运的是也可以被gzip了，而图片文件被gzip效果不明显）。&lt;/p&gt;
+
+&lt;p&gt;3.编码成本&lt;/p&gt;
+
+&lt;p&gt;图片完成后还需要base64编码，目前估计手工完成的多，因此，增加了一定的工作量，虽然不多。
+1 2 下一页&lt;/p&gt;
+
+&lt;p&gt;五、优缺点权衡下的实际应用价值&lt;/p&gt;
+
+&lt;p&gt;权衡上面所展示的优缺点，貌似base64:URL图片没有什么用武之地啊，实际上非也，有一种情况时有base64编码作为background-image背景图片利要远大于弊的。何种情况呢？&lt;/p&gt;
+
+&lt;p&gt;在web页面制作的时候，由于某些现实原因，我们可以会用到下面这一类图片：&lt;/p&gt;
+
+&lt;p&gt;1.这类图片不能与其他图片以CSS Sprite的形式存在，只能独行&lt;/p&gt;
+
+&lt;p&gt;2.这类图片从诞生之日起，基本上很少被更新&lt;/p&gt;
+
+&lt;p&gt;3.这类图片的实际尺寸很小&lt;/p&gt;
+
+&lt;p&gt;4.这
+类图片在网站中大规模使用&lt;/p&gt;
+
+&lt;p&gt;想想看，你的网站中有没有同时满足上面四条的背景图片呢？&lt;/p&gt;
+
+&lt;p&gt;//zxx： 假设已经过去了今天朝鲜火箭勃起的时间&lt;/p&gt;
+
+&lt;p&gt;怎样，想到了没？提点下，例如下面这个企鹅微博中的loading gif图片（537字节，勉强算是）：&lt;/p&gt;
+
+&lt;p&gt;加载中&lt;/p&gt;
+
+&lt;p&gt;537字节的大小实际上还是偏大了点，让我们看个更better的例子，大家可以去豆瓣首页，可以看到下图所示的垂直线：&lt;/p&gt;
+
+&lt;p&gt;为background-image图片（for 等高布局）：&lt;/p&gt;
+
+&lt;p&gt;从bg_line.png这样的命名可以预知（不是：home_bg_line.png），该背景图片会在（可以在）网站中多处使用。&lt;/p&gt;
+
+&lt;p&gt;图示平铺图片地址为：http://upload.chinaz.com/2012/0606/1338961513462.png&lt;/p&gt;
+
+&lt;p&gt;大小1 * 1 像素，png格式，大小88字节。//zxx： 当图片颜色简单到一定程度的时候，gif格式图片大小要小于png8， 所以，这个点如果保存成gif格式，只需要43字节，为png一半大小&lt;/p&gt;
+
+&lt;p&gt;像这种图片大小极小，但又占据了一次HTTP请求，同时不能与其他背景图片Sprite，而网站很多地方都使用。因此，没有什么背景图片比这个更适合使用本文的“base64:URL图片”技术进行优化了！&lt;/p&gt;
+
+&lt;p&gt;为了比对优化的好处，我们来看个实际的demo.&lt;/p&gt;
+
+&lt;p&gt;六、base64:URL图片的实际应用&lt;/p&gt;
+
+&lt;p&gt;我博客首页的个人信息介绍处的虚点是使用背景图片实现的（考虑到IE6 dot边框跟dashed搞基，不同浏览器虚点间距差异等）。&lt;/p&gt;
+
+&lt;p&gt;现在，demo就要展示如何使用base64:URL图片实现该虚点效果。&lt;/p&gt;
+
+&lt;p&gt;您可以狠狠地点击这里：base64 URL虚点背景demo&lt;/p&gt;
+
+&lt;p&gt;相关CSS代码如下：&lt;/p&gt;
+
+&lt;p&gt;.dot {&lt;/p&gt;
+
+&lt;p&gt;background-image: url(data:image/gif;base64,R0lGODlhBAABAIABAMLBwfLx8SH5BAEAAAEALAAAAAAEAAEAAAICRF4AOw==);&lt;/p&gt;
+
+&lt;p&gt;*background-image: url(“http://upload.chinaz.com/2012/0606/1338961513409.gif”); // IE6~IE7&lt;/p&gt;
+
+&lt;p&gt;background-repeat: repeat-x;&lt;/p&gt;
+
+&lt;p&gt;background-position: left bottom;&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;可以看到，使用base64的CSS代码量基本上跟下面使用完整地址差不多，因此，对于一些级小尺寸图片，所谓增加CSS文件大小的不足可以忽略（再考虑到gzip），同时减少了1个HTTP请求，加上这个图片网站很多地方使用，因此，累积节约的HTTP请求就很惊人了。&lt;/p&gt;
+
+&lt;p&gt;当然，唯一美中不足的是，对于IE6~IE7浏览器不能享受到这种“百利仅一害”的优化技术，我们还需要专门为它们擦屁股。不过，权衡来看，还是很值得的，毕竟目前，在中国IE8浏览器是大头（就在最近），IE6，IE7 就乖乖地泻下去吧。&lt;/p&gt;
+
+&lt;p&gt;最后，展示下demo页面YSLOW分析图吧，可以看到，没有任何CSS background-image请求。&lt;/p&gt;
+
+&lt;p&gt;没有CSS 背景图片的请求 张鑫旭-鑫空间-鑫生活&lt;/p&gt;
+
+&lt;p&gt;再次提醒下，使用base64编码代替CSS背景图片是有局限性的，并不是所有图片都适合使用base64编码这种技术的。例如：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;CSS Sprite图片后期维护会死人，只能是独立图片&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;图片尺寸过大，CSS文件就会变成了臃肿的大棒子，反而不利于加载&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;CSS文件的优点就是重用，因此，如果背景图片就一个地方使用，减少的请求数有限，考虑到其他成本，还不如直接使用普通url图片地址&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果图片经常改动，好吧，哥们，苦逼的前端加班仔中就多了一个你&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;因此，技术本身虽好，需天时地利人和方可使用。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>GO Lang</title>
+   <link href="http://qinly.github.io/2015/04/06/GO%20Lang"/>
+   <updated>2015-04-06T00:00:00+08:00</updated>
+   <id>http://qinly.github.io/2015/04/06/GO Lang</id>
+   <content type="html">
+&lt;p&gt;Part Ⅰ. Standard Markdown&lt;br /&gt;
+## GO Lang 环境搭建
+========
+安装报错：&lt;code&gt;go get code.google.com/p/go-tour/gotour&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;nohighlight&quot;&gt;
+go: missing Mercurial command. See http://golang.org/s/gogetcmd  
+package code.google.com/p/go-tour/gotour: 
+exec: &quot;hg&quot;: executable file not found in $PATH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;在bash/dos命令行中输入:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&quot;shell&quot;&gt;
+go get -u github.com/nsf/gocode
+go get -u github.com/DisposaBoy/MarGo
+
+go install github.com/nsf/gocode
+go install github.com/DisposaBoy/MarGo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装完gocode和MarGo后, 切换到$GOPATH/bin目录, 运行./MarGo.&lt;/p&gt;
+
+&lt;p&gt;至此, 编辑环境配置完成, 点击查看最后的界面.&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;文档&lt;/h2&gt;
+
+&lt;p&gt;既可以直接访问golang.org/doc, 也可以在命令行中输入
+&amp;gt;godoc -http=:8080&lt;/p&gt;
+
+&lt;p&gt;后访问本地镜像:&lt;a href=&quot;http://127.0.0.1:8080&quot;&gt;&lt;code&gt;http://127.0.0.1:8080&lt;/code&gt;&lt;/a&gt;;&lt;/p&gt;
+
+&lt;p&gt;入门书籍&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;最开始时建议学习官方网站上的&lt;a href=&quot;http://tour.golang.org/welcome/1&quot;&gt;a-tour-of-golang&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;接下来, &lt;a href=&quot;http://www.miek.nl/downloads/2011/go-0.3.pdf&quot;&gt;learning-go&lt;/a&gt;是一本不错的开源书籍, 其中文版由xingxing翻译和维护, 翻译质量非常不错.&lt;/li&gt;
+  &lt;li&gt;也可以考虑最近出版的&lt;a href=&quot;http://www.ituring.com.cn/book/967&quot;&gt;«go语言编程»&lt;/a&gt;, 该书作者是国内使用golang编写大型程序的先驱.&lt;/li&gt;
+  &lt;li&gt;sd&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;对web感兴趣的同学可以关注network program with go, Go Web 编程等.&lt;/p&gt;
+
+&lt;h6 id=&quot;section-1&quot;&gt;社区&lt;/h6&gt;
+
+&lt;p&gt;建议加入&lt;a href=&quot;https://groups.google.com/forum/?fromgroups#!forum/golang-china&quot;&gt;golang-china&lt;/a&gt;邮件列表, 这个社区非常活跃, 每天的讨论邮件基本上都在50封以上. 
+当然英文好的同学可以选择&lt;a href=&quot;https://groups.google.com/group/golang-nuts&quot;&gt;golang-nuts&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;mercurial&quot;&gt;安装 Mercurial&lt;/h2&gt;
+
+&lt;p&gt;cmd中，找不到Mercurial (hg)&lt;br /&gt;
+解决：&lt;br /&gt;
+1. 安装Mercurial，在命令行中输入一下命令，自动下载并安装，就可以用hg更新源代码了：&lt;br /&gt;
+&lt;code&gt;sudo easy_install mercurial&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;例如：&lt;code&gt;hg clone https://code.google.com/p/core-plot/&lt;/code&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;nix-profile&quot;&gt;*nix profile读取顺序&lt;/h4&gt;
+
+&lt;blockquote&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;&lt;code&gt;/etc/profile&lt;/code&gt;: 在登录时,操作系统定制用户环境时使用的第一个文件,为系统的每个用户设置环境信息,当用户第一次登录时,该文件被执行&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;/etc/environment&lt;/code&gt;: 在登录时操作系统使用的第二个文件, 系统在读取你自己的profile前,设置环境文件的环境变量&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;~/.profile&lt;/code&gt;:在登录时用到的第三个文件 是.profile文件,每个用户都可使用该文件输入专用于自己使用的shell信息,当用户登录时,该文件仅仅执行一次!默认情况下,他设置一些环境变量,执行用户的.bashrc文件&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;/etc/bashrc&lt;/code&gt;:为每一个运行bash shell的用户执行此文件.当bash shell被打开时,该文件被读取&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;~/.bashrc&lt;/code&gt;:该文件包含专用于你的bash shell的bash信息,当登录时以及每次打开新的shell时,该该文件被读取&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;重启生效，立即生效使用：&lt;code&gt;source .profile&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Linux主机安全配置的几个脚本</title>
+   <link href="http://qinly.github.io/2015/04/02/Linux%E4%B8%BB%E6%9C%BA%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%E7%9A%84%E5%87%A0%E4%B8%AA%E8%84%9A%E6%9C%AC"/>
+   <updated>2015-04-02T00:00:00+08:00</updated>
+   <id>http://qinly.github.io/2015/04/02/Linux主机安全配置的几个脚本</id>
+   <content type="html">
+&lt;p&gt;JBoss应用服务器优化&lt;br /&gt;
+原文地址:&lt;a href=&quot;http://wangtong40.iteye.com/blog/737235&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;vim /etc/login.defs
+PASS_MAX_DAYS   90    //口令最大有效天数
+PASS_MIN_DAYS   10    //口令最小有效天数
+PASS_MIN_LEN    8     //口令最少字符数
+PASS_WARN_AGE   5     //口令过期提前警告天数&lt;/p&gt;
+
+&lt;p&gt;echo ‘ONLY Authorized users only! All accesses logged’ &amp;gt; /etc/motd&lt;/p&gt;
+
+&lt;p&gt;rm -f /etc/issue
+rm -f /etc/issue.net
+touch /etc/issue
+touch /etc/issue.net&lt;/p&gt;
+
+&lt;p&gt;find / -name *.rhosts
+touch /.rhosts &amp;amp;&amp;amp; chmod 0 /.rhosts&lt;/p&gt;
+
+&lt;p&gt;防止IP SPOOF
+echo “nospoof on” »/etc/host.conf&lt;/p&gt;
+
+&lt;p&gt;chkconfig bluetooth off
+chkconfig firstboot off
+chkconfig cups off
+chkconfig ip6tables off
+chkconfig iptables off
+chkconfig isdn off
+chkconfig kudzu off
+chkconfig sendmail off
+chkconfig smartd off
+chkconfig autofs off
+service vncserver off
+service bluetooth stop
+service firstboot stop
+service cups stop
+service ip6tables stop
+service iptables stop
+service isdn stop
+service kudzu stop
+service sendmail stop
+service smartd stop
+service autofs stop
+service vncserver stop&lt;/p&gt;
+
+&lt;p&gt;锁定不需要的用户
+usermod -L adm
+usermod -L lp
+usermod -L sync
+usermod -L shutdown
+usermod -L halt
+usermod -L news
+usermod -L uucp
+usermod -L operator
+usermod -L ftp
+usermod -L rpc
+usermod -L rpcuser
+usermod -L gopher
+usermod -L nscd&lt;/p&gt;
+
+&lt;p&gt;删除不需要的组
+groupdel lp
+groupdel news
+groupdel games
+groupdel gopher
+groupdel uucp&lt;/p&gt;
+
+&lt;p&gt;本次必须要保留的用户是：
+root、bin、nobody、ntp、ssh、uucp
+必须保留的组包括：
+root、nobody、ntp、uucp&lt;/p&gt;
+
+&lt;p&gt;useradd jboss
+passwd jboss
+usermod -g jboss -G wheel jboss
+vim /etc/pam.d/su
+auth required pam_wheel.so use.uid   把这一行的注释去掉，只有wheel组的用户才能su到root
+chown -R jboss.jboss /usr/local/jboss-4.2.3.GA&lt;/p&gt;
+
+&lt;h1 id=&quot;binbash&quot;&gt;!/bin/bash&lt;/h1&gt;
+&lt;p&gt;cd /usr/local/jboss-4.2.3.GA/server/default/deploy/
+rm -rf bsh-deployer.xml
+rm -rf client-deployer-service.xml
+rm -rf ear-deployer.xml
+rm -rf ejb-deployer.xml
+rm -rf http-invoker.sar
+rm -rf jboss-bean.deployer
+rm -rf jms
+rm -rf jsr88-service.xml
+rm -rf schedule-manager-service.xml
+rm -rf scheduler-service.xml
+rm -rf sqlexception-service.xml
+rm -rf uuid-key-generator.sar
+rm -rf jmx-console.war
+rm -rf management
+cd /usr/local/jboss-4.2.3.GA/server/default/deploy/jboss-web.deployer/ROOT.war
+rm -rf *
+exit&lt;/p&gt;
+
+&lt;p&gt;隐藏jboss版本信息
+vim /usr/local/jboss-4.2.3.GA/server/default/deploy/jboss-web.deployer/server.xml&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;Connector&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;port=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;8080&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;address=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;${jboss.bind.address}&amp;quot;&lt;/span&gt;   
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;          &lt;span class=&quot;na&quot;&gt;maxThreads=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;250&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxHttpHeaderSize=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;8192&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt;          &lt;span class=&quot;na&quot;&gt;emptySessionPath=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;true&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;protocol=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;HTTP/1.1&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt;          &lt;span class=&quot;na&quot;&gt;enableLookups=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;false&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;redirectPort=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;8443&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;acceptCount=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;100&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;          &lt;span class=&quot;na&quot;&gt;connectionTimeout=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;20000&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;disableUploadTimeout=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt;          &lt;span class=&quot;na&quot;&gt;server=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;ESB&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;在这一段最后加上一个server=”ESB”/&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;vim /usr/local/jboss-4.2.3.GA/server/default/deploy/jboss-web.deployer/conf/web.xml&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;init-param&amp;gt;
+     &amp;lt;param-name&amp;gt;X-Powered-By&amp;lt;/param-name&amp;gt;
+     &amp;lt;param-value&amp;gt;ESB2.0&amp;lt;/param-value&amp;gt;
+  &amp;lt;/init-param&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;vim /etc/ssh/sshd_config
+把PermitRootLogin yes前面的”#”去掉，把”yes”改为”no”&lt;/p&gt;
+
+&lt;h1 id=&quot;clientalivecountmax-3&quot;&gt;ClientAliveCountMax 3&lt;/h1&gt;
+&lt;p&gt;把这个前面的”#”去掉，就是超过3分钟闲置，就自动断开session&lt;/p&gt;
+
+&lt;p&gt;service sshd restart&lt;/p&gt;
+
+&lt;p&gt;sed -i -e ‘s/^LANG=.*/LANG=”en_US.UTF-8”/’   /etc/sysconfig/i18n
+source /etc/sysconfig/i18n&lt;/p&gt;
+
+&lt;p&gt;vim /etc/hosts.allow
+sshd:192.168.0.199,192.168.0.201,192.168.0.121&lt;/p&gt;
+
+&lt;p&gt;vim /etc/hosts.deny
+sshd:all&lt;/p&gt;
+
+&lt;p&gt;service xinetd restart&lt;/p&gt;
+
+&lt;p&gt;截短~/.bash_history文件
+vim /etc/profile
+HISTSIZE=1000改成20&lt;/p&gt;
+
+&lt;p&gt;vim /etc/skel/.bash_logout 
+在/etc/skel/.bash_logout在文件中添加这行
+rm -rf $HOME/.bash_history 
+这样当用户注销时，.bash_history被删除&lt;/p&gt;
+
+&lt;p&gt;DenyHosts是用Python2.3写的一个程序，它会分析/var/log/secure（redhat，Fedora Core）等日志文件，当发现同一IP在进行多次SSH密
+码尝试时就会记录IP到/etc/hosts.deny文件，从而达到自动屏蔽该IP的目的。&lt;/p&gt;
+
+&lt;p&gt;wget http://downloads.sourceforge.net/project/denyhosts/denyhosts/2.6/DenyHosts-2.6.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fdenyhosts%2Ffiles%2F&amp;amp;ts=1281580068&amp;amp;mirror=ncu&lt;/p&gt;
+
+&lt;p&gt;tar -zxvf DenyHosts-2.6.tar.gz
+cd DenyHosts-2.6
+python setup.py install&lt;/p&gt;
+
+&lt;p&gt;cd /usr/share/denyhosts/
+grep -v “^#” denyhosts.cfg-dist &amp;gt; denyhosts.cfg
+cp daemon-control-dist daemon-control&lt;/p&gt;
+
+&lt;p&gt;vim denyhosts.cfg&lt;/p&gt;
+
+&lt;p&gt;PURGE_DENY = 5m                //5分钟清除&lt;/p&gt;
+
+&lt;p&gt;DENY_THRESHOLD_INVALID = 1    //允许无效用户失败的次数&lt;/p&gt;
+
+&lt;p&gt;DENY_THRESHOLD_VALID = 5       //允许普通用户登陆失败的次数&lt;/p&gt;
+
+&lt;p&gt;DENY_THRESHOLD_ROOT = 5        //允许root登陆失败的次数&lt;/p&gt;
+
+&lt;p&gt;chown root daemon-control
+chmod 700 daemon-control&lt;/p&gt;
+
+&lt;p&gt;vim /etc/rc.local
+/usr/share/denyhosts/daemon-control start&lt;/p&gt;
+
+&lt;p&gt;vim /etc/audit/audit.rules  最后增加一行，对该目录审计
+-w /usr/local/jboss-4.2.3.GA/server/default/deploy -pwa
+service auditd restart&lt;/p&gt;
+
+&lt;p&gt;查看审计规则 auditctl -l
+查看audit运行状态 auditctl -s&lt;/p&gt;
+
+&lt;p&gt;审计工具
+wget http://www.rootkit.nl/files/lynis-1.2.9.tar.gz&lt;/p&gt;
+
+&lt;p&gt;给关键文件加root权限
+chmod  744  /etc/passwd
+chmod  740  /etc/shadow
+chmod  744  /etc/rc3.d
+chmod  744  /etc/profile
+chmod  1777  /tmp
+chmod 644 /etc/exports
+chmod -R 700 /etc/rc.d/init.d/*&lt;/p&gt;
+
+&lt;p&gt;Control-Alt-Delete 键盘关机命令
+vim /etc/inittab
+ca::ctrlaltdel:/sbin/shutdown -t3 -r now
+这一行前面加#,改成
+#ca::ctrlaltdel:/sbin/shutdown -t3 -r now&lt;/p&gt;
+
+&lt;p&gt;给文件加锁(暂时不实施)
+chattr +i /etc/passwd
+chattr +i /etc/shadow
+chattr +i /etc/group
+chattr +i /etc/services
+chmod 600 /etc/xinetd.conf&lt;/p&gt;
+
+&lt;p&gt;当chattr +i时就是禁止对文件进行修改,当我们要添加用户时,就会有麻烦,因为passwd文件禁止修改写入.
+所以我们还要该掉它的属性.chattr -i.&lt;/p&gt;
+
+&lt;p&gt;脚本如下：&lt;/p&gt;
+
+&lt;p&gt;init_sysctl.sh&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash  
+cp /etc/sysctl.conf /etc/sysctl.conf.bak  
+echo &quot;####add by hx10###&quot;&amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.ipv4.ip_local_port_range = 1024 65536&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.core.rmem_max=16777216&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.core.wmem_max=16777216&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.ipv4.tcp_rmem=4096 87380 16777216&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.ipv4.tcp_wmem=4096 65536 16777216&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.ipv4.tcp_fin_timeout = 15&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.ipv4.tcp_keepalive_time = 600&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.ipv4.tcp_tw_recycle = 1&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.core.netdev_max_backlog = 30000&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.ipv4.tcp_no_metrics_save=1&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.core.somaxconn = 262144&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.ipv4.tcp_syncookies = 1&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.ipv4.tcp_max_orphans = 8000&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.ipv4.tcp_max_syn_backlog = 8000&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.ipv4.tcp_synack_retries = 2&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+echo &quot;net.ipv4.tcp_syn_retries = 2&quot; &amp;gt;&amp;gt; /etc/sysctl.conf  
+sysctl -p  
+###change max open files  
+ulimit -SHn 102400  
+echo &quot;ulimit -SHn 102400&quot; &amp;gt;&amp;gt;/etc/rc.local  
+ulimit -a  
+exit  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;init_system.sh&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash  
+#change password policy  
+cp /etc/login.defs  /etc/login.defs.bak  
+sed -i &#39;s/^PASS_MAX_DAYS\s*99999/PASS_MAX_DAYS    90/&#39; /etc/login.defs  
+sed -i &#39;s/^PASS_MIN_DAYS\s*0/PASS_MIN_DAYS    10/&#39; /etc/login.defs  
+sed -i &#39;s/^PASS_MIN_LEN\s*5/PASS_MIN_LEN     8/&#39; /etc/login.defs  
+sed -i &#39;s/^PASS_WARN_AGE\s*7/PASS_WARN_AGE    5/&#39; /etc/login.defs  
+#stop Linux detection  
+echo &#39;ONLY Authorized users only! All accesses logged&#39; &amp;gt; /etc/motd  
+cp /etc/issue /etc/issue.bak  
+cp /etc/issue.net /etc/issue.net.bak  
+rm -f /etc/issue  
+rm -f /etc/issue.net  
+touch /etc/issue  
+touch /etc/issue.net  
+#stop rhosts  
+#find / -name *.rhosts   
+touch /.rhosts &amp;amp;&amp;amp; chmod 0 /.rhosts  
+#stop ip spoof  
+cp /etc/host.conf /etc/host.conf.bak  
+echo &quot;nospoof on&quot; &amp;gt;&amp;gt;/etc/host.conf  
+#stop service  
+chkconfig bluetooth off  
+chkconfig firstboot off  
+chkconfig cups off  
+chkconfig ip6tables off  
+chkconfig iptables off  
+chkconfig isdn off  
+chkconfig kudzu off  
+chkconfig sendmail off  
+chkconfig smartd off  
+chkconfig autofs off  
+chkconfig ntpd off  
+chkconfig snmpd on  
+chkconfig portmap on  
+chkconfig nfs on  
+#service vncserver off  
+/etc/init.d/vncserver stop  
+service bluetooth stop  
+service firstboot stop  
+service cups stop  
+service ip6tables stop  
+service iptables stop  
+service isdn stop  
+service kudzu stop  
+service sendmail stop  
+service smartd stop  
+service autofs stop  
+service vncserver stop  
+service ntpd stop  
+service snmpd restart  
+service portmap restart  
+service nfs restart  
+#lock user unnecessary  
+usermod -L adm  
+usermod -L lp  
+usermod -L sync  
+usermod -L shutdown  
+usermod -L halt  
+usermod -L news  
+usermod -L uucp  
+usermod -L operator  
+usermod -L ftp  
+usermod -L rpc  
+usermod -L rpcuser  
+usermod -L gopher  
+usermod -L nscd  
+#add jboss user  
+useradd jboss &amp;amp;&amp;amp; echo &quot;23adjfajskdfja&quot; | passwd --stdin jboss  
+usermod -g jboss -G wheel jboss   
+#chown -R jboss.jboss /usr/local/jboss-4.2.3.GA  
+#change system character  
+cp /etc/sysconfig/i18n /etc/sysconfig/i18n.bak  
+cat /dev/null&amp;gt; /etc/sysconfig/i18n  
+echo &#39;LANG=&quot;en_US.UTF-8&quot;&#39; &amp;gt;/etc/sysconfig/i18n  
+#echo &#39;LANG=&quot;zh_CN.GB18030&quot;&#39; &amp;gt;/etc/sysconfig/i18n  
+#sed -i -e &#39;s/^LANG=.*/LANG=&quot;en_US.UTF-8&quot;/&#39; /etc/sysconfig/i18n  
+source /etc/sysconfig/i18n  
+#add ssh user  
+cp /etc/hosts.allow /etc/hosts.allow.bak  
+cp /etc/hosts.deny /etc/hosts.deny.bak  
+echo &quot;sshd:192.168.0.199,192.168.0.201,192.168.0.121&quot; &amp;gt;&amp;gt;/etc/hosts.allow  
+echo &quot;sshd:all&quot; &amp;gt;&amp;gt;/etc/hosts.deny  
+#Limit ROOT from Remote server  
+cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak  
+echo &quot;PermitRootLogin no&quot; &amp;gt;&amp;gt; /etc/ssh/sshd_config  
+echo &quot;ClientAliveCountMax 2&quot; &amp;gt;&amp;gt; /etc/ssh/sshd_config  
+#clean history  
+cp /etc/skel/.bash_logout /etc/skel/.bash_logout.bak  
+cp /etc/profile /etc/profile.bak  
+sed -i &#39;s/^HISTSIZE=1000/HISTSIZE=20/&#39; /etc/profile  
+echo &quot;rm -rf \$HOME/.bash_history &quot; &amp;gt;&amp;gt;/etc/skel/.bash_logout  
+#install DenyHosts  
+cd /usr/local/src  
+wget ftp://192.168.0.21/pub/DenyHosts-2.6.tar.gz  
+tar -zxvf DenyHosts-2.6.tar.gz  
+cd DenyHosts-2.6  
+python setup.py install  
+cd /usr/share/denyhosts/  
+grep -v &quot;^#&quot; denyhosts.cfg-dist &amp;gt; denyhosts.cfg  
+cp daemon-control-dist daemon-control  
+cp denyhosts.cfg denyhosts.cfg.bak  
+sed -i &#39;s/^PURGE_DENY =/PURGE_DENY = 5m/&#39; /usr/share/denyhosts/denyhosts.cfg  
+sed -i &#39;s/^DENY_THRESHOLD_INVALID = 5/DENY_THRESHOLD_INVALID = 1/&#39; /usr/share/denyhosts/denyhosts.cfg  
+sed -i &#39;s/^DENY_THRESHOLD_VALID = 10/DENY_THRESHOLD_VALID = 5/&#39; /usr/share/denyhosts/denyhosts.cfg  
+sed -i &#39;s/^DENY_THRESHOLD_ROOT = 1/DENY_THRESHOLD_ROOT = 5/&#39; /usr/share/denyhosts/denyhosts.cfg  
+chown root daemon-control  
+chmod 700 daemon-control  
+cp /etc/rc.local /etc/rc.local.bak  
+echo &quot;/usr/share/denyhosts/daemon-control start&quot; &amp;gt;&amp;gt;/etc/rc.local  
+/usr/share/denyhosts/daemon-control start  
+#limit alt-ctl-delete  
+cp /etc/inittab /etc/inittab.bak  
+sed -i &#39;s/^ca::ctrlaltdel:\/sbin\/shutdown -t3 -r now/\#ca::ctrlaltdel:\/sbin\/shutdown -t3 -r now/g&#39; /etc/inittab  
+#limit key file  
+chmod  744  /etc/passwd  
+chmod  740  /etc/shadow  
+chmod  744  /etc/rc3.d  
+chmod  744  /etc/profile  
+chmod  1777  /tmp  
+chmod 644 /etc/exports  
+chmod -R 700 /etc/rc.d/init.d/*  
+chattr +i /etc/passwd  
+chattr +i /etc/shadow  
+chattr +i /etc/group  
+chattr +i /etc/services  
+chmod 600 /etc/xinetd.conf  
+#remove   
+#chattr -i /etc/passwd  
+#chattr -i /etc/shadow  
+service sshd restart  
+service xinetd restart  
+ps -ef |grep vnc |grep &#39;/usr/share/vnc/classes&#39; |awk &#39;{print $2}&#39; |xargs kill -9  
+echo &quot;congratulations!&quot;  
+sleep 2  
+exit    
+&lt;/code&gt;&lt;/pre&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>js 对象方法、类方法、原型方法的区别;私有属性、公有属性、公有静态属性的区别</title>
+   <link href="http://qinly.github.io/2015/03/01/js%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95%E5%89%AF%E6%9C%AC"/>
+   <updated>2015-03-01T00:00:00+08:00</updated>
+   <id>http://qinly.github.io/2015/03/01/js属性和方法副本</id>
+   <content type="html">
+&lt;h2 id=&quot;oracle&quot;&gt;记录-Oracle字符串分割查询&lt;/h2&gt;
+
+&lt;p&gt;原文地址:&lt;a href=&quot;http://my.oschina.net/tongjh/blog/265087?p=&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;源码：&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+&lt;html&gt;
+    &lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+        &lt;title&gt;test&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;script&gt;
+        //对象构造函数
+        function Atest(name){
+            //私有属性，只能在对象构造函数内部使用
+            var className = &quot;Atest&quot;;
+            //公有属性,在对象实例化后调用
+            this.name = name;
+            //对象方法
+            this.hello = function(){
+                alert(this.name);
+                alert(this.msg());//使用原型方法扩充的方法可以在类内部使用
+                alert(this.sex);//使用原型方法扩充的属性可以在类内部使用
+                alert(Atest.age);//静态属性调用时格式为[对象.静态属性]
+            }
+        }
+        //类方法 (实际是静态方法直接调用) 位置：Person类的外部 语法格式：类名称.方法名称 = function([参数...]){ 语句行; }
+        Atest.Run = function(){
+            alert(&quot;我是类方法 Run&quot;);
+        }
+ 
+ 
+        //原型方法
+        Atest.prototype.msg = function(){
+            alert(&quot;我的名字是：&quot;+this.name);//如果原型方法当作静态方法直接调用时，this.name无法被调用
+        }
+ 
+        //公有静态属性 在类的外部
+        Atest.age = 20;//公有静态属性不能使用 【this.属性】，只能使用 【对象.属性】 调用
+ 
+        //原型属性，当作是类内部的属性使用【this.原型属性】，也可以当成公有静态属性使用【对象.prototype.原型属性】
+        Atest.prototype.sex = &quot;男&quot;;
+ 
+        Atest.Run(); //类方法也是静态方法，可以直接使用 【对象.静态方法()】
+        Atest.prototype.msg();//原型方法当成静态方法使用时【对象.prototype.方法()】 
+        alert(Atest.prototype.sex);//原型属性当作静态属性使用时【对象.prototype.方法()】
+        var a = new Atest(&quot;zhangsan&quot;);//对象方法和原型方法需要实例化对象后才可以使用
+        a.hello();//对象方法必须实例化对象
+        a.msg();//原型方法必须实例化对象
+        alert(a.age)://错误，公有静态属性只能使用 【对象.属性】调用
+ 
+        //ps:尽量将方法定义为原型方法，原型方法避免了每次调用构造函数时对属性或方法的构造，节省空间,创建对象快.
+    &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+&lt;p&gt;```&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>记录-Oracle字符串分割查询</title>
+   <link href="http://qinly.github.io/2015/02/11/%E8%AE%B0%E5%BD%95%EF%BC%9AOracle%E5%88%86%E5%89%B2%E6%9F%A5%E8%AF%A2"/>
+   <updated>2015-02-11T00:00:00+08:00</updated>
+   <id>http://qinly.github.io/2015/02/11/记录：Oracle分割查询</id>
+   <content type="html">
+&lt;h2 id=&quot;oracle&quot;&gt;记录-Oracle字符串分割查询&lt;/h2&gt;
+
+&lt;p&gt;问题描述:&lt;br /&gt;
+	使用&lt;/p&gt;
+
+&lt;p&gt;解决办法：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;将&lt;code&gt;查询字符串&lt;/code&gt;转换为&lt;code&gt;行&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;使用子查询完成模糊查询&lt;/li&gt;
+  &lt;li&gt;使用&lt;code&gt;exists&lt;/code&gt;关键字查询包含的记录&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;code&gt;	
+SELECT ALA00, ALA18,ALA22 FROM
+	fe_base5.app_leader_add ttt
+WHERE 
+	DECODE (
+		&#39;1137,1138,1139,1140,1141&#39;,
+		&#39;&#39;,
+		NULL,
+		&#39;1137,1138,1139,1140,1141&#39;
+	) IS NULL
+OR
+	exists (
+		-- 不使用in语句，instr效率更高
+		SELECT * from (
+			-- level关键字：当需要把一个字符串按某一分隔符分隔后，变为数据列，即把字符串行变为列，可以使用level关键字
+			SELECT
+				REGEXP_SUBSTR ( &#39;1137,1138,1139,1140,1141&#39;, &#39;[^,]+&#39;, 1, LEVEL ) AS field_split
+			FROM
+				DUAL CONNECT BY LEVEL &amp;lt;= LENGTH (&#39;1137,1138,1139,1140,1141&#39;) + 1 - LENGTH (
+			REPLACE (&#39;1137,1138,1139,1140,1141&#39;,&#39;,&#39;,&#39;&#39;))
+		) aa where instr(&#39;1137,1138,1139,1140,1141&#39;,aa.field_split) &amp;gt; 0
+	);
+&lt;/code&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Win8安装Oracle 10g</title>
+   <link href="http://qinly.github.io/2015/02/10/Win8%E5%AE%89%E8%A3%85Oracle%2010g"/>
+   <updated>2015-02-10T00:00:00+08:00</updated>
+   <id>http://qinly.github.io/2015/02/10/Win8安装Oracle 10g</id>
+   <content type="html">
+&lt;p&gt;只要在&lt;code&gt;Oracle 10G\database\stage\prereq\db\refhost.xml&lt;/code&gt;后面添加：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;CERTIFIED_SYSTEMS&amp;gt;
+&amp;lt;!--Microsoft Windows 7  、Windows 8--&amp;gt;
+&amp;lt;OPERATING_SYSTEM&amp;gt;
+	&amp;lt;VERSION VALUE=&quot;6.1&quot;/&amp;gt;
+&amp;lt;/OPERATING_SYSTEM&amp;gt;
+&amp;lt;OPERATING_SYSTEM&amp;gt;
+	&amp;lt;VERSION VALUE=&quot;6.2&quot;/&amp;gt;
+&amp;lt;/OPERATING_SYSTEM&amp;gt;
+&amp;lt;!--Microsoft Windows 7  6.1  、Windows 8  6.2--&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>常用JAVA Web开源项目</title>
+   <link href="http://qinly.github.io/2015/01/12/JS%20%E4%BC%98%E5%8C%96"/>
+   <updated>2015-01-12T00:00:00+08:00</updated>
+   <id>http://qinly.github.io/2015/01/12/JS 优化</id>
+   <content type="html">
+&lt;h2 id=&quot;js-&quot;&gt;JS 学习笔记&lt;/h2&gt;
+&lt;p&gt;Bootstrap：&lt;a href=&quot;https://github.com/twbs/bootstrap&quot;&gt;Bootstrap&lt;/a&gt; 
+&amp;gt;简洁、直观、强悍的前端开发框架，让web开发更迅速、简单&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;** 插件 **&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;单星号 = &lt;em&gt;斜体&lt;/em&gt;&lt;br /&gt;
+单下划线 = &lt;em&gt;斜体&lt;/em&gt;&lt;br /&gt;
+双星号 = &lt;strong&gt;加粗&lt;/strong&gt;&lt;br /&gt;
+双下划线 = &lt;strong&gt;加粗&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Links and Email&lt;/p&gt;
+
+&lt;p&gt;Inline:&lt;/p&gt;
+
+&lt;p&gt;点击调整到链接 &lt;a href=&quot;http://baidu.com/&quot; title=&quot;Title&quot;&gt;示例&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Reference-style labels (titles are optional):&lt;/p&gt;
+
+&lt;p&gt;Email:&lt;/p&gt;
+
+&lt;p&gt;发送邮件链接 &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#101;&amp;#120;&amp;#097;&amp;#109;&amp;#112;&amp;#108;&amp;#101;&amp;#064;&amp;#101;&amp;#120;&amp;#097;&amp;#109;&amp;#112;&amp;#108;&amp;#101;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#101;&amp;#120;&amp;#097;&amp;#109;&amp;#112;&amp;#108;&amp;#101;&amp;#064;&amp;#101;&amp;#120;&amp;#097;&amp;#109;&amp;#112;&amp;#108;&amp;#101;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Images&lt;/p&gt;
+
+&lt;p&gt;Inline (titles are optional):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://su.bdimg.com/static/superplus/img/logo_white_ee663702.png&quot; alt=&quot;alt text&quot; title=&quot;Title&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Reference-style:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/url/to/img.jpg&quot; alt=&quot;alt text&quot; title=&quot;Title&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Headers&lt;/p&gt;
+
+&lt;p&gt;Setext风格:&lt;/p&gt;
+
+&lt;h1 id=&quot;header-1&quot;&gt;Header 1&lt;/h1&gt;
+
+&lt;h2 id=&quot;header-2&quot;&gt;Header 2&lt;/h2&gt;
+
+&lt;p&gt;atx风格 (关闭 # 是可选的):&lt;/p&gt;
+
+&lt;h1 id=&quot;header-1-1&quot;&gt;Header 1&lt;/h1&gt;
+
+&lt;h2 id=&quot;header-2-1&quot;&gt;Header 2&lt;/h2&gt;
+
+&lt;h6 id=&quot;header-6&quot;&gt;Header 6&lt;/h6&gt;
+
+&lt;p&gt;列表&lt;/p&gt;
+
+&lt;p&gt;Ordered, without paragraphs:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Foo&lt;/li&gt;
+  &lt;li&gt;Bar&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Unordered, with paragraphs:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A list item.&lt;/p&gt;
+
+    &lt;p&gt;With multiple paragraphs.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Bar&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can nest them:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Abacus
+    &lt;ul&gt;
+      &lt;li&gt;answer&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Bubbles
+    &lt;ol&gt;
+      &lt;li&gt;bunk&lt;/li&gt;
+      &lt;li&gt;bupkis
+        &lt;ul&gt;
+          &lt;li&gt;BELITTLER&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Blockquotes-块引用&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Email-style 风格的尖括号&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;并且他们可以嵌套&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;h4 id=&quot;headers-in-blockquotes&quot;&gt;Headers in blockquotes&lt;/h4&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;You can quote a list.&lt;/li&gt;
+    &lt;li&gt;Etc.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Inline Code&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;code&amp;gt;&lt;/code&gt; spans are delimited
+by backticks.&lt;/p&gt;
+
+&lt;p&gt;您可以包括文字引号如： &lt;code&gt;`this`&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;代码块&lt;/p&gt;
+
+&lt;p&gt;缩进代码块的每一行至少4 spaces或1 tab 。&lt;/p&gt;
+
+&lt;p&gt;这是一个正常的段落。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;This is a preformatted code block.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Horizontal Rules&lt;/p&gt;
+
+&lt;p&gt;三个或更多的破折号或星号-Three or more dashes or asterisks:&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Hard Line Breaks&lt;/p&gt;
+
+&lt;p&gt;End a line with two or more spaces:&lt;/p&gt;
+
+&lt;p&gt;Roses are red, &lt;br /&gt;
+Violets are blue.&lt;/p&gt;
+
+&lt;p&gt;Part Ⅱ. Extra Syntax
+Footnotes&lt;/p&gt;
+
+&lt;p&gt;Footnotes work mostly like reference-style links. A footnote is made of two things: a marker in the text that will become a superscript number; a footnote definition that will be placed in a list of footnotes at the end of the document. A footnote looks like this:&lt;/p&gt;
+
+&lt;p&gt;这是一个脚注文本.&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;~~删除线(Strikethrough)~~&lt;/p&gt;
+
+&lt;p&gt;代码块-Fenced Code Blocks&lt;/p&gt;
+
+&lt;p&gt;Start with a line containing 3 or more backtick ` characters, and ends with the first line with the same number of backtick `:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+Fenced code blocks are like Stardard
+Markdown’s regular code blocks, except that
+they’re not indented and instead rely on a
+start and end fence lines to delimit the code
+block.
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Tables&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;一个简单的表格，看起来像这样&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;First Header&lt;/th&gt;
+      &lt;th&gt;Second Header&lt;/th&gt;
+      &lt;th&gt;Third Header&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Content Cell&lt;/td&gt;
+      &lt;td&gt;Content Cell&lt;/td&gt;
+      &lt;td&gt;Content Cell&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Content Cell&lt;/td&gt;
+      &lt;td&gt;Content Cell&lt;/td&gt;
+      &lt;td&gt;Content Cell&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;通过添加冒号分隔线指定每列对齐&lt;br /&gt;
+ &lt;!--
+	:----------- | :-----------: | -----------:
+--&gt;
+如果你愿意, 你可以每一行行尾添加一个引号&lt;code&gt;|&lt;/code&gt;
+&amp;lt;!–
+| First Header | Second Header | Third Header |
+| ———— | ————- | ———— |
+| Content Cell | Content Cell  | Content Cell |&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;–&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Anchor&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;您还可以添加一个元素，如标题，锚，然后你就可以链接到这个锚点的地方，当你点击链接，在预览视图，它会自动滚动到目的地锚的地方。&lt;/p&gt;
+
+&lt;h2 id=&quot;idanchor1&quot;&gt;&lt;a href=&quot;id:anchor1&quot;&gt;这是一个例子-链接到锚&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Click this &lt;a href=&quot;#anchor1&quot;&gt;link&lt;/a&gt; in the Preview view will auto scroll to the place of the destination anchor.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;那是脚注. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Markdown</title>
+   <link href="http://qinly.github.io/2015/01/06/%E5%B8%B8%E7%94%A8JAVA%20Web%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE"/>
+   <updated>2015-01-06T00:00:00+08:00</updated>
+   <id>http://qinly.github.io/2015/01/06/常用JAVA Web开源项目</id>
+   <content type="html">
+&lt;h2 id=&quot;bootstrap&quot;&gt;Bootstrap&lt;/h2&gt;
+&lt;p&gt;Bootstrap：&lt;a href=&quot;https://github.com/twbs/bootstrap&quot;&gt;Bootstrap&lt;/a&gt; 
+&amp;gt;简洁、直观、强悍的前端开发框架，让web开发更迅速、简单&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;** 插件 **&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Part Ⅰ. Standard Markdown
+Strong and Emphasize&lt;/p&gt;
+
+&lt;p&gt;单星号 = &lt;em&gt;斜体&lt;/em&gt;&lt;br /&gt;
+单下划线 = &lt;em&gt;斜体&lt;/em&gt;&lt;br /&gt;
+双星号 = &lt;strong&gt;加粗&lt;/strong&gt;&lt;br /&gt;
+双下划线 = &lt;strong&gt;加粗&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Links and Email&lt;/p&gt;
+
+&lt;p&gt;Inline:&lt;/p&gt;
+
+&lt;p&gt;点击调整到链接 &lt;a href=&quot;http://baidu.com/&quot; title=&quot;Title&quot;&gt;示例&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Reference-style labels (titles are optional):&lt;/p&gt;
+
+&lt;p&gt;Email:&lt;/p&gt;
+
+&lt;p&gt;发送邮件链接 &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#101;&amp;#120;&amp;#097;&amp;#109;&amp;#112;&amp;#108;&amp;#101;&amp;#064;&amp;#101;&amp;#120;&amp;#097;&amp;#109;&amp;#112;&amp;#108;&amp;#101;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#101;&amp;#120;&amp;#097;&amp;#109;&amp;#112;&amp;#108;&amp;#101;&amp;#064;&amp;#101;&amp;#120;&amp;#097;&amp;#109;&amp;#112;&amp;#108;&amp;#101;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Images&lt;/p&gt;
+
+&lt;p&gt;Inline (titles are optional):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://su.bdimg.com/static/superplus/img/logo_white_ee663702.png&quot; alt=&quot;alt text&quot; title=&quot;Title&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Reference-style:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/url/to/img.jpg&quot; alt=&quot;alt text&quot; title=&quot;Title&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Headers&lt;/p&gt;
+
+&lt;p&gt;Setext风格:&lt;/p&gt;
+
+&lt;h1 id=&quot;header-1&quot;&gt;Header 1&lt;/h1&gt;
+
+&lt;h2 id=&quot;header-2&quot;&gt;Header 2&lt;/h2&gt;
+
+&lt;p&gt;atx风格 (关闭 # 是可选的):&lt;/p&gt;
+
+&lt;h1 id=&quot;header-1-1&quot;&gt;Header 1&lt;/h1&gt;
+
+&lt;h2 id=&quot;header-2-1&quot;&gt;Header 2&lt;/h2&gt;
+
+&lt;h6 id=&quot;header-6&quot;&gt;Header 6&lt;/h6&gt;
+
+&lt;p&gt;列表&lt;/p&gt;
+
+&lt;p&gt;Ordered, without paragraphs:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Foo&lt;/li&gt;
+  &lt;li&gt;Bar&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Unordered, with paragraphs:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A list item.&lt;/p&gt;
+
+    &lt;p&gt;With multiple paragraphs.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Bar&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can nest them:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Abacus
+    &lt;ul&gt;
+      &lt;li&gt;answer&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Bubbles
+    &lt;ol&gt;
+      &lt;li&gt;bunk&lt;/li&gt;
+      &lt;li&gt;bupkis
+        &lt;ul&gt;
+          &lt;li&gt;BELITTLER&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Blockquotes-块引用&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Email-style 风格的尖括号&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;并且他们可以嵌套&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;h4 id=&quot;headers-in-blockquotes&quot;&gt;Headers in blockquotes&lt;/h4&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;You can quote a list.&lt;/li&gt;
+    &lt;li&gt;Etc.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Inline Code&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;code&amp;gt;&lt;/code&gt; spans are delimited
+by backticks.&lt;/p&gt;
+
+&lt;p&gt;您可以包括文字引号如： &lt;code&gt;`this`&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;代码块&lt;/p&gt;
+
+&lt;p&gt;缩进代码块的每一行至少4 spaces或1 tab 。&lt;/p&gt;
+
+&lt;p&gt;这是一个正常的段落。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;This is a preformatted code block.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Horizontal Rules&lt;/p&gt;
+
+&lt;p&gt;三个或更多的破折号或星号-Three or more dashes or asterisks:&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Hard Line Breaks&lt;/p&gt;
+
+&lt;p&gt;End a line with two or more spaces:&lt;/p&gt;
+
+&lt;p&gt;Roses are red, &lt;br /&gt;
+Violets are blue.&lt;/p&gt;
+
+&lt;p&gt;Part Ⅱ. Extra Syntax
+Footnotes&lt;/p&gt;
+
+&lt;p&gt;Footnotes work mostly like reference-style links. A footnote is made of two things: a marker in the text that will become a superscript number; a footnote definition that will be placed in a list of footnotes at the end of the document. A footnote looks like this:&lt;/p&gt;
+
+&lt;p&gt;这是一个脚注文本.&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;~~删除线(Strikethrough)~~&lt;/p&gt;
+
+&lt;p&gt;代码块-Fenced Code Blocks&lt;/p&gt;
+
+&lt;p&gt;Start with a line containing 3 or more backtick ` characters, and ends with the first line with the same number of backtick `:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+Fenced code blocks are like Stardard
+Markdown’s regular code blocks, except that
+they’re not indented and instead rely on a
+start and end fence lines to delimit the code
+block.
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Tables&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;一个简单的表格，看起来像这样&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;First Header&lt;/th&gt;
+      &lt;th&gt;Second Header&lt;/th&gt;
+      &lt;th&gt;Third Header&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Content Cell&lt;/td&gt;
+      &lt;td&gt;Content Cell&lt;/td&gt;
+      &lt;td&gt;Content Cell&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Content Cell&lt;/td&gt;
+      &lt;td&gt;Content Cell&lt;/td&gt;
+      &lt;td&gt;Content Cell&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;通过添加冒号分隔线指定每列对齐&lt;br /&gt;
+ &lt;!--
+	:----------- | :-----------: | -----------:
+--&gt;
+如果你愿意, 你可以每一行行尾添加一个引号&lt;code&gt;|&lt;/code&gt;
+&amp;lt;!–
+| First Header | Second Header | Third Header |
+| ———— | ————- | ———— |
+| Content Cell | Content Cell  | Content Cell |&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;–&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Anchor&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;您还可以添加一个元素，如标题，锚，然后你就可以链接到这个锚点的地方，当你点击链接，在预览视图，它会自动滚动到目的地锚的地方。&lt;/p&gt;
+
+&lt;h2 id=&quot;idanchor1&quot;&gt;&lt;a href=&quot;id:anchor1&quot;&gt;这是一个例子-链接到锚&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Click this &lt;a href=&quot;#anchor1&quot;&gt;link&lt;/a&gt; in the Preview view will auto scroll to the place of the destination anchor.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;那是脚注. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>呵呵</title>
+   <link href="http://qinly.github.io/2015/01/06/%E5%91%B5%E5%91%B5"/>
+   <updated>2015-01-06T00:00:00+08:00</updated>
+   <id>http://qinly.github.io/2015/01/06/呵呵</id>
+   <content type="html">
+&lt;hr /&gt;
+&lt;p&gt;layout: post
+title: “感慨”
+description: “”
+category: java
+tags: 生活
+—&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap&quot;&gt;Bootstrap&lt;/h2&gt;
+&lt;p&gt;Bootstrap：&lt;a href=&quot;https://github.com/twbs/bootstrap&quot;&gt;Bootstrap&lt;/a&gt; 
+&amp;gt;简洁、直观、强悍的前端开发框架，让web开发更迅速、简单&lt;/p&gt;
+
+&lt;p&gt;又想马儿跑，又想马儿不吃草。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>JavaScript 对象方法、属性</title>
+   <link href="http://qinly.github.io/2015/01/05/JavaScript%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95"/>
+   <updated>2015-01-05T00:00:00+08:00</updated>
+   <id>http://qinly.github.io/2015/01/05/JavaScript属性和方法</id>
+   <content type="html">
+&lt;h2 id=&quot;javascript&quot;&gt;JavaScript&lt;/h2&gt;
+&lt;p&gt;### 对象方法、类方法、原型方法的区别;
+### 私有属性、公有属性、公有静态属性的区别&lt;/p&gt;
+
+&lt;p&gt;原文地址:&lt;a href=&quot;http://my.oschina.net/tongjh/blog/265087?p=&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;源码：&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+&lt;html&gt;
+    &lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+        &lt;title&gt;test&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;script&gt;
+        //对象构造函数
+        function Atest(name){
+            //私有属性，只能在对象构造函数内部使用
+            var className = &quot;Atest&quot;;
+            //公有属性,在对象实例化后调用
+            this.name = name;
+            //对象方法
+            this.hello = function(){
+                alert(this.name);
+                alert(this.msg());//使用原型方法扩充的方法可以在类内部使用
+                alert(this.sex);//使用原型方法扩充的属性可以在类内部使用
+                alert(Atest.age);//静态属性调用时格式为[对象.静态属性]
+            }
+        }
+        //类方法 (实际是静态方法直接调用) 位置：Person类的外部 语法格式：类名称.方法名称 = function([参数...]){ 语句行; }
+        Atest.Run = function(){
+            alert(&quot;我是类方法 Run&quot;);
+        }
+ 
+ 
+        //原型方法
+        Atest.prototype.msg = function(){
+            alert(&quot;我的名字是：&quot;+this.name);//如果原型方法当作静态方法直接调用时，this.name无法被调用
+        }
+ 
+        //公有静态属性 在类的外部
+        Atest.age = 20;//公有静态属性不能使用 【this.属性】，只能使用 【对象.属性】 调用
+ 
+        //原型属性，当作是类内部的属性使用【this.原型属性】，也可以当成公有静态属性使用【对象.prototype.原型属性】
+        Atest.prototype.sex = &quot;男&quot;;
+ 
+        Atest.Run(); //类方法也是静态方法，可以直接使用 【对象.静态方法()】
+        Atest.prototype.msg();//原型方法当成静态方法使用时【对象.prototype.方法()】 
+        alert(Atest.prototype.sex);//原型属性当作静态属性使用时【对象.prototype.方法()】
+        var a = new Atest(&quot;zhangsan&quot;);//对象方法和原型方法需要实例化对象后才可以使用
+        a.hello();//对象方法必须实例化对象
+        a.msg();//原型方法必须实例化对象
+        alert(a.age)://错误，公有静态属性只能使用 【对象.属性】调用
+ 
+        //ps:尽量将方法定义为原型方法，原型方法避免了每次调用构造函数时对属性或方法的构造，节省空间,创建对象快.
+    &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+&lt;p&gt;```&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>JBoss精简优化</title>
+   <link href="http://qinly.github.io/2015/01/05/JBoss%E7%B2%BE%E7%AE%80"/>
+   <updated>2015-01-05T00:00:00+08:00</updated>
+   <id>http://qinly.github.io/2015/01/05/JBoss精简</id>
+   <content type="html">
+&lt;p&gt;JBoss应用服务器优化&lt;br /&gt;
+原文地址:&lt;a href=&quot;http://wangtong40.iteye.com/blog/737235&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;java-opts&quot;&gt;Java OPTS设置&lt;/h2&gt;
+
+&lt;p&gt;在Java的Jvm分为主要为两大块：一个是heap和 nheap
+Heap包括三个区域. Eden space、survivor space、tenured space.&lt;br /&gt;
+其中surivor space包括两个区，一个是from区，一个是to区
+Eden是负责新对象的创建区域。当新对象无法在eden区创建的时候，eden区会进行minor gc,会将一些失效的对象清除。会将清除下来的部分对象放到survivor space区域或者tenured space区域。当tenured space的对象越来越多的时候，达到jvm内存不足10%的时候，会进行一次full gc来释放对象。项目要尽可能少的full gc ,应为full gc比较占用内存，一般要求吞吐量比较大的时候，尽量的将new区域设置的比较大一点。也就是eden和survivor这个区域。
+下面简要的说一下配置参数&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set JAVA_OPTS=%JAVA_OPTS% -Xms128m -Xmx512m -XX:MaxPermSize=256m
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;-Xms512m 代表jvm最少用512m内存,32bit操作系统最大在1.5g-2g之间，64位的无限制。&lt;br /&gt;
+-Xmx1024m 代表jvm最多使用1024m内存&lt;br /&gt;
+尽量的将-Xms和-Xmx大小设置相同，这样避免内存重新分配影响性能&lt;/p&gt;
+
+&lt;p&gt;-Xss=128k 线程初始化大小，5.0之前默认是128k,之后为1m,线程机器最大为3000-5000&lt;br /&gt;
+-XX:MaxPermSize=256m：这是表明持久类（也就是noheap区域）的最大为256m&lt;br /&gt;
+-XX:PermSize=256m这个持久区域初始化为256m，一般持久类的大小是64m，这个配置是最常用的配置。&lt;br /&gt;
+如果需要考虑到吞吐量，那么new space和old space你就得重新分配一下&lt;/p&gt;
+
+&lt;p&gt;Jvm垃圾收集器包括三种：串行，并行，并发
+串行：处理小型数据，jdk1.4之前默认使用
+并行：1.5和1.5之后使用，&lt;br /&gt;
+处理典型服务器配置有以下几种：&lt;br /&gt;
+-Xmx3800m -Xms3800m -Xmn2g -Xss128k -XX:+UseParallelGC -XX:ParallelGCThreads=20&lt;/p&gt;
+
+&lt;p&gt;-XX:+UseParallelGC：选择垃圾收集器为并行收集器。此配置仅对年轻代有效。即上述配置下，年轻代使用并发收集，而年老代仍旧使用串行收集。
+-XX:ParallelGCThreads=20：配置并行收集器的线程数，即：同时多少个线程一起进行垃圾回收。此值最好配置与处理器数目相同&lt;/p&gt;
+
+&lt;p&gt;-Xmx3550m -Xms3550m -Xmn2g -Xss128k -XX:+UseParallelGC -XX:ParallelGCThreads=20 -XX:+UseParallelOldGC&lt;/p&gt;
+
+&lt;p&gt;-XX:+UseParallelOldGC：配置年老代垃圾收集方式为并行收集。JDK6.0支持对年老代并行收集。&lt;br /&gt;
+-Xmx3550m -Xms3550m -Xmn2g -Xss128k -XX:+UseConcMarkSweepGC -XX:CMSFullGCsBeforeCompaction=5 -XX:+UseCMSCompactAtFullCollection&lt;/p&gt;
+
+&lt;p&gt;XX:CMSFullGCsBeforeCompaction：此值设置运行多少次GC以后对内存空间进行压缩、整理。由于并发收集器不对内存空间进行压缩、整理，所以运行一段时间以后会产生“碎片”，使得运行效率降低。&lt;br /&gt;
+-XX:+UseCMSCompactAtFullCollection：打开对年老代的压缩。可能会影响性能，但是可以消除碎片&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;常见配置汇总&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;堆设置&lt;br /&gt;
+-Xss128k：JBoss每增加一个线程（thread)就会立即消耗128K,默认值好像是512k.&lt;br /&gt;
+-Xms512m:初始堆大小,代表jvm最少用 512m内存&lt;br /&gt;
+-Xmx:最大堆大小 一般为服务器的3/4内存量，推荐至少使用4G内存，不应该超过物理内存的90％&lt;br /&gt;
+-XX:NewSize=n:设置年轻代大小&lt;br /&gt;
+-XX:NewRatio=n:设置年轻代和年老代的比值。如:为3，表示年轻代与年老代比值为1：3，年轻代占整个年轻代年老代和的1/4&lt;br /&gt;
+-XX:SurvivorRatio=n:年轻代中Eden区与两个Survivor区的比值。注意Survivor区有两个。如：3，表示Eden：Survivor=3：2，一个Survivor区占整个年轻代的1/5&lt;br /&gt;
+-XX:MaxPermSize=n:设置持久代大小&lt;/li&gt;
+  &lt;li&gt;收集器设置&lt;br /&gt;
+-XX:+UseSerialGC:设置串行收集器&lt;br /&gt;
+-XX:+UseParallelGC:设置并行收集器&lt;br /&gt;
+-XX:+UseParalledlOldGC:设置并行年老代收集器&lt;br /&gt;
+-XX:+UseConcMarkSweepGC:设置并发收集器&lt;/li&gt;
+  &lt;li&gt;垃圾回收统计信息&lt;br /&gt;
+-XX:+PrintGC
+-XX:+PrintGCDetails
+-XX:+PrintGCTimeStamps
+-Xloggc:filename&lt;/li&gt;
+  &lt;li&gt;并行收集器设置&lt;br /&gt;
+-XX:ParallelGCThreads=n:设置并行收集器收集时使用的CPU数。并行收集线程数。
+-XX:MaxGCPauseMillis=n:设置并行收集最大暂停时间
+-XX:GCTimeRatio=n:设置垃圾回收时间占程序运行时间的百分比。公式为1/(1+n)&lt;/li&gt;
+  &lt;li&gt;并发收集器设置
+-XX:+CMSIncrementalMode:设置为增量模式。适用于单CPU情况。
+-XX:ParallelGCThreads=n:设置并发收集器年轻代收集方式为并行收集时，使用的CPU数。并行收集线程数。
+查看CPU数
+cat /proc/cpuinfo | grep “processor” | wc -l
+生产环境8G内存jboss配置如下
+Java代码  收藏代码&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;code&gt;
+    if [ &quot;x$JAVA_OPTS&quot; = &quot;x&quot; ]; then   
+       JAVA_OPTS=&quot;-Xss128k -Xms6000m -Xmx6000m -XX:MaxNewSize=512m -XX:MaxPermSize=512M -XX:+UseParallelGC -XX:ParallelGCThreads=16 -XX:+UseParallelOldGC -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000&quot;   
+    fi   
+&lt;/code&gt;
+生产环境4G内存jboss配置如下&lt;br /&gt;
+` 
+    if [ “x$JAVA_OPTS” = “x” ]; then &lt;br /&gt;
+       JAVA_OPTS=”-Xss128k -Xms3000m -Xmx3000m -XX:MaxNewSize=256m -XX:MaxPermSize=256m -XX:+UseParallelGC -XX:ParallelGCThreads=16 -XX:+UseParallelOldGC -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000” &lt;br /&gt;
+    fi
+`&lt;/p&gt;
+
+&lt;p&gt;数据库连接
+在JBOSS_HOME\Server\default\deploy目录下存在&lt;strong&gt;-xa-ds.xml文件，用于JBOSS同数据库连接等配置，默认情况下&lt;/strong&gt;-xa-ds.xml文件中不包含关于数据库连接池等方面的配置信息，可以添加一下内容进行数据库连接池方面的设置：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;min-pool-size&amp;gt;100&amp;lt;/min-pool-size&amp;gt;   
+&amp;lt;max-pool-size&amp;gt;500&amp;lt;/max-pool-size&amp;gt;    
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第3章 Tomcat1 web.xml&lt;/p&gt;
+
+&lt;p&gt;修改Tomcat的JSP自动编译配置项,修改如下代码：
+&lt;code&gt;%JBOSS_HOME%/deploy/jbossweb-tomcat50.sar/conf/web.xml&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;servlet&amp;gt;  
+&amp;lt;servlet-name&amp;gt;jsp&amp;lt;/servlet-name&amp;gt;  
+&amp;lt;servlet-class&amp;gt;org.apache.jasper.servlet.JspServlet&amp;lt;/servlet-class&amp;gt;  
+&amp;lt;init-param&amp;gt;  
+&amp;lt;param-name&amp;gt;development&amp;lt;/param-name&amp;gt;  
+&amp;lt;param-value&amp;gt;false&amp;lt;/param-value&amp;gt;  
+&amp;lt;/init-param&amp;gt;  
+&amp;lt;/servlet&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;追加&lt;code&gt;development=false&lt;/code&gt;
+通知tomcat在用户访问时不必作JSP文件是否已被修改的检查。&lt;br /&gt;
+2 se    ver.xml
+修改Tomcat的server.xml文件，设置线程数、支持压缩协议等…&lt;/p&gt;
+
+&lt;p&gt;%JBOSS_HOME%/deploy/jbossweb-tomcat50.sar/server.xml&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;Connector port=&quot;80&quot; address=&quot;0.0.0.0&quot;  
+maxThreads=&quot;75&quot; maxHttpHeaderSize=&quot;8192&quot;  
+minSpareThreads=&quot;55&quot; maxSpareThreads=&quot;25&quot;  
+enableLookups=&quot;false&quot; redirectPort=&quot;8443&quot; acceptCount=&quot;100&quot;  
+connectionTimeout=&quot;20000&quot; disableUploadTimeout=&quot;true&quot;  
+compression=&quot;on&quot; compressableMimeType=&quot;text/html,text/xml,text/plain,text/css,  
+text/javascript,application/xhtml+xml,application/x-javascript,application/javascript,text/xhtml&quot;  
+/&amp;gt;  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;第4章    日志优化&lt;/h2&gt;
+&lt;p&gt;优化JBOSS日志：%JBOSS_HOME%/server/default/conf/log4j.xml
+4.1    修改Append&lt;/p&gt;
+
+&lt;p&gt;修改以下内容：
+```XML
+  &lt;span&gt;&lt;param name=&quot;Append&quot; value=&quot;true&quot; /&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;param name=&quot;Threshold&quot; value=&quot;WARN&quot; /&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;修改后的代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;appender name=&quot;FILE&quot; class=&quot;org.jboss.logging.appender.DailyRollingFileAppender&quot;&amp;gt;  
+&amp;lt;errorHandler class=&quot;org.jboss.logging.util.OnlyOnceErrorHandler&quot;/&amp;gt;  
+&amp;lt;param name=&quot;File&quot; value=&quot;${jboss.server.home.dir}/log/server.log&quot;/&amp;gt;  
+&amp;lt;param name=&quot;Append&quot; value=&quot;true&quot;/&amp;gt;  
+&amp;lt;param name=&quot;Threshold&quot; value=&quot;WARN&quot;/&amp;gt;  
+&amp;lt;param name=&quot;DatePattern&quot; value=&quot;&#39;.&#39;yyyy-MM-dd&quot;/&amp;gt;  
+&amp;lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&amp;gt;  
+&amp;lt;param name=&quot;ConversionPattern&quot; value=&quot;%d %-5p [%c] %m%n&quot;/&amp;gt;  
+&amp;lt;/layout&amp;gt;  
+&amp;lt;/appender&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;4.2    修改Root&lt;br /&gt;
+	关闭控制台日志输出：屏蔽：&lt;appender-ref ref=&quot;CONSOLE&quot;&gt;&lt;/appender-ref&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;root&amp;gt;  
+&amp;lt;!--&amp;lt;appender-ref ref=&quot;CONSOLE&quot;/&amp;gt;--&amp;gt;  
+&amp;lt;appender-ref ref=&quot;FILE&quot;/&amp;gt;  
+&amp;lt;/root&amp;gt;  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;jboss&quot;&gt;JBOSS瘦身&lt;/h2&gt;
+&lt;p&gt;在JBOSS中提供许多通常不需要的服务和Jar包，比如JMX、Mail、AOP、Hibernate等，可以根据具体项目所涉及的技术，删减JBOSS内置应用，从而提高JBOSS中间件启动速度，减少占用系统资源。&lt;/p&gt;
+
+&lt;p&gt;删减服务&lt;br /&gt;
+在&lt;code&gt;%JBOSS_HOME%/server/default/deploy&lt;/code&gt;中含有一些比如jboss-aop.deployer等目录和mail-service.xml等应用配置文件，如果不需要使用这些应用的话，可以将其一一删除，不过删除时要分外小心，避免应用系统无法启动。
+下图为只包含数据库应用的一个已删减不需要服务后的deploy文件夹目录：&lt;/p&gt;
+
+&lt;p&gt;删减Jar包&lt;br /&gt;
+在&lt;code&gt;%JBOSS_HOME%/server/default/lib&lt;/code&gt;中包含一些应用系统不需要的Jar包，这些包同样可以进行删除。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ 
+</feed>

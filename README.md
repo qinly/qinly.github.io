@@ -5,6 +5,6 @@
 访问地址：[我的玩具博客](https://qinly.github.com) 😋
 
 
-## License
+## Copyright and license
 
 [MIT](http://opensource.org/licenses/MIT)

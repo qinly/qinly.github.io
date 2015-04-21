@@ -1,16 +1,33 @@
-# This is the default format. 
-# For more see: http://jekyllrb.com/docs/permalinks/
-permalink: /:categories/:year/:month/:day/:title 
-
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
+# This is the default format.
+# For more see: http://jekyllrb.com/docs/permalinks/
+permalink: /:categories/:year/:month/:day/:title
+
+# Dependencies
+# markdown:         kramdown
+mardown: Redcarpet
+# highlighter:      rouge
 # highlighter: pygments
-# mardown: redcarpet
+
+
+# Permalinks
+# permalink:        pretty
+
+## Server
+# source:           docs
+destination:      _gh_pages
+host:             0.0.0.0
+port:             4000
+# url:              http://getbootstrap.com
+encoding:         UTF-8
+
+# Custom vars
 
 redcarpet:
   extensions: [fenced_code_blocks]
   render_options:
 
-# Themes are encouraged to use these universal variables 
+# Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
 #
 title : Qing 个人博客
@@ -98,13 +115,11 @@ JB :
       width: 580
       colorscheme: light
    
-  # Settings for analytics helper
-  # Set 'provider' to the analytics provider you want to use.
-  # Set 'provider' to false to turn analytics off globally.
-  #        
+
+  # 统计
   analytics :
-    provider :custom
-    # provider : google 
+    provider : baidu
+    # provider : google
     # google : 
     #     tracking_id : 'UA-58183252-1'
     # getclicky :
@@ -115,22 +130,16 @@ JB :
     #     baseURL : 'myserver.tld/piwik' # Piwik installation address (without protocol)
     #     idsite : '1'                   # the id of the site on Piwik
 
-  # Settings for sharing helper. 
-  # Sharing is for things like tweet, plusone, like, reddit buttons etc.
-  # Set 'provider' to the sharing provider you want to use.
-  # Set 'provider' to false to turn sharing off globally.
-  #
+  # 分享
   sharing :
     provider : false
     
-  # Settings for all other include helpers can be defined by creating 
-  # a hash with key named for the given helper. ex:
+  # Settings for all other include helpers can be defined by creating a hash with key named for the given helper. ex:
   #
   #   pages_list :
-  #     provider : "custom"   
-  #
-  # Setting any helper's provider to 'custom' will bypass the helper code
-  # and include your custom code. Your custom file must be defined at:
-  #   ./_includes/custom/[HELPER]
-  # where [HELPER] is the name of the helper you are overriding.
+  #     provider : "custom"
+
+codeguide:
+  name:          前端编码规范
+  description:   编写灵活、稳定、高质量的 HTML 和 CSS 代码的规范。
   

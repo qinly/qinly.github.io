@@ -6,6 +6,7 @@ group: navigation
 ---
 {% include JB/setup %}
 
+
 代码高亮：
 
 <pre><code class="Javascript">
@@ -29,3 +30,17 @@ function $initHighlight(block, cls) {
   }
 }
 </code></pre>
+
+Jekyll自带的代码高亮显示：
+{% highlight ruby %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+
+{% highlight JavaScript %}
+var test = function () {
+	// TODO SSS
+}
+
+{% endhighlight %}
