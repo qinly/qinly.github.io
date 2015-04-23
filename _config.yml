@@ -30,10 +30,10 @@ redcarpet:
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
 #
-title : Qing 个人博客
+title : Qinly
 tagline: Site Tagline
 author :
-  name : GuoQing. Lai.
+  name : Qinly.
   email : qing_lgq@163.com
   github : qinly
   # twitter : 
@@ -102,18 +102,18 @@ JB :
   # Set 'provider' to false to turn commenting off globally.
   #
   comments :
-    provider : disqus
-    disqus :
-      short_name : jekyllbootstrap
-    livefyre :
-      site_id : 123
-    intensedebate :
-      account : 123abc
-    facebook :
-      appid : 123
-      num_posts: 5
-      width: 580
-      colorscheme: light
+    provider : duoshuo
+    duoshuo :
+      short_name : qinly
+    # livefyre :
+    #   site_id : 123
+    # intensedebate :
+    #   account : 123abc
+    # facebook :
+    #   appid : 123
+    #   num_posts: 5
+    #   width: 580
+    #   colorscheme: light
    
 
   # 统计
