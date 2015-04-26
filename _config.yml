@@ -6,8 +6,7 @@ permalink: /:categories/:year/:month/:day/:title
 # Dependencies
 # markdown:         kramdown
 mardown: Redcarpet
-# highlighter:      rouge
-# highlighter: pygments
+# highlighter:      rouge/pygments
 
 
 # Permalinks
@@ -105,16 +104,6 @@ JB :
     provider : duoshuo
     duoshuo :
       short_name : qinly
-    # livefyre :
-    #   site_id : 123
-    # intensedebate :
-    #   account : 123abc
-    # facebook :
-    #   appid : 123
-    #   num_posts: 5
-    #   width: 580
-    #   colorscheme: light
-   
 
   # 统计
   analytics :
@@ -133,7 +122,7 @@ JB :
   # 分享
   sharing :
     provider : false
-    
+
   # Settings for all other include helpers can be defined by creating a hash with key named for the given helper. ex:
   #
   #   pages_list :
@@ -142,4 +131,3 @@ JB :
 codeguide:
   name:          前端编码规范
   description:   编写灵活、稳定、高质量的 HTML 和 CSS 代码的规范。
-  
